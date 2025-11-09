@@ -48,27 +48,27 @@ jobs:
       - name: Sync version in pyproject with tag
         run: |
           python - <<'PY'
-import os, pathlib, re, sys
-tag = os.environ['GITHUB_REF_NAME']
-if not tag.startswith('v'):
-    sys.exit(f'Unexpected tag format: {tag}')
-version = tag[1:]
-path = pathlib.Path('pyproject.toml')
-content = path.read_text()
-content = re.sub(r'^version\s*=\s*"[^"]+"', f'version = "{version}"', content, flags=re.MULTILINE)
-path.write_text(content)
-PY
+          import os, pathlib, re, sys
+          tag = os.environ['GITHUB_REF_NAME']
+          if not tag.startswith('v'):
+              sys.exit(f'Unexpected tag format: {tag}')
+          version = tag[1:]
+          path = pathlib.Path('pyproject.toml')
+          content = path.read_text()
+          content = re.sub(r'^version\s*=\s*"[^"]+"', f'version = "{version}"', content, flags=re.MULTILINE)
+          path.write_text(content)
+          PY
       - name: Check version tag matches
         run: |
           python - <<'PY'
-import os, re, pathlib, sys
-content = pathlib.Path('pyproject.toml').read_text()
-match = re.search(r'^version\s*=\s*"([^"]+)"', content, re.MULTILINE)
-version = match.group(1)
-tag = os.environ['GITHUB_REF_NAME']
-if tag != f'v{version}':
-    sys.exit(f'Tag {tag} does not match version {version}')
-PY
+          import os, re, pathlib, sys
+          content = pathlib.Path('pyproject.toml').read_text()
+          match = re.search(r'^version\s*=\s*"([^"]+)"', content, re.MULTILINE)
+          version = match.group(1)
+          tag = os.environ['GITHUB_REF_NAME']
+          if tag != f'v{version}':
+              sys.exit(f'Tag {tag} does not match version {version}')
+          PY
       - name: Build package
         run: python -m build
       - name: Publish to PyPI
@@ -76,3 +76,4 @@ PY
         with:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
+
