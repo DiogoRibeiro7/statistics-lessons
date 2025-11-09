@@ -1,0 +1,62 @@
+[project]
+name = "statistics_lessons"
+version = "0.1.0"
+description = "Lesson plans and utilities demonstrating statistics concepts with Python"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Diogo Ribeiro", email = "dfr@esmad.ipp.pt"}
+]
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "scipy",
+    "pandas",
+    "matplotlib",
+    "plotly",
+    "scikit-learn",
+    "statsmodels>=0.14.5",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "flake8",
+    "pre-commit",
+    "pytest-cov",
+    "hypothesis",
+]
+
+modern = [
+    "pymc",
+    "pystan",
+    "torch",
+    "causalgraphicalmodels",
+    "transformers",
+]
+
+docs = [
+    "sphinx",
+    "sphinx-autodoc-typehints",
+]
+
+[tool.flake8]
+# Restrict flake8 to error-level checks used in CI
+select = "E9,F63,F7,F82"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.coverage.run]
+source = ["src/statistics_lessons"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"

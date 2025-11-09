@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "statistics_lessons"
+version: 0.1.0
+authors:
+  - family-names: Ribeiro
+    given-names: Diogo
+    orcid: "https://orcid.org/0009-0001-2022-7072"
+    affiliation: ESMAD - Instituto Politécnico do Porto
+    email: dfr@esmad.ipp.pt
+repository-code: "https://github.com/DiogoRibeiro7/statistics_lessons"
+abstract: "Lesson plans and Python utilities demonstrating statistics concepts with machine learning examples."
+license: MIT
+date-released: 2025-06-25
